@@ -33,14 +33,14 @@ body {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  padding: 10px 15px;
-  border: none;
+  padding: 12px 16px;
   border-radius: 30px;
+  border: none;
   background: #ff4d6d;
   color: white;
   font-size: 14px;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  z-index: 9999;
 }
 
 h1 {
@@ -186,14 +186,18 @@ setInterval(() => {
   const music = document.getElementById("bgMusic");
 const btn = document.getElementById("musicBtn");
 
+const music = document.getElementById("bgMusic");
+const btn = document.getElementById("musicBtn");
+
 btn.addEventListener("click", () => {
-  if (music.paused) {
-    music.play();
-    btn.innerText = "⏸ Pause Music";
-  } else {
-    music.pause();
-    btn.innerText = "▶ Play Music";
-  }
+  music.volume = 0.6;
+  music.play()
+    .then(() => {
+      btn.innerText = "⏸ Pause Music";
+    })
+    .catch(err => {
+      alert("Tap the button again to allow audio");
+    });
 });
 
 </script>
