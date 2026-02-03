@@ -4,14 +4,43 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hemanth ❤️ Jacquline</title>
+  
 
 <style>
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-  text-align: center;
-  color: #333;
+  ...
+}
+
+.slider {
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.slide {
+  width: 100%;
+  border-radius: 20px;
+  display: none;
+}
+
+.slide.active {
+  display: block;
+  animation: fadeIn 1.5s ease;
+}
+  #musicBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 30px;
+  background: #ff4d6d;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 h1 {
@@ -64,6 +93,25 @@ p {
   from { transform: scale(0.8); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+  .heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 20px;
+  color: rgba(255, 0, 100, 0.8);
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+
 </style>
 </head>
 
@@ -80,26 +128,61 @@ p {
 
 <h2>Our Memories 💖</h2>
 
-<div class="gallery">
-  <img src="gallery1.jpg">
-  <img src="gallery2.jpg">
-  <img src="gallery3.jpg">
+<div class="slider">
+  <img src="gallery1.jpg" class="slide active">
+  <img src="gallery2.jpg" class="slide">
+  <img src="gallery3.jpg" class="slide">
 </div>
 
 <!-- 🎵 Background Music -->
-<audio autoplay loop>
-  <source src="music.mpeg" type="audio/mpeg">
+<button id="musicBtn">▶ Play Music</button>
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const startDate = new Date("2022-02-04");
-const today = new Date();
+  const startDate = new Date("2022-02-04"); 
+  const today = new Date();
 
-const diffTime = Math.abs(today - startDate);
-const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const diffTime = today - startDate;
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-document.getElementById("countdown").innerText =
-  `❤️ ${diffDays} Days of Love & Counting ❤️`;
+  document.getElementById("countdown").innerText =
+    `❤️ ${diffDays} Days of Love & Togetherness ❤️`;
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}, 500);
+  let currentSlide = 0;
+const slides = document.querySelectorAll(".slide");
+
+setInterval(() => {
+  slides[currentSlide].classList.remove("active");
+  currentSlide = (currentSlide + 1) % slides.length;
+  slides[currentSlide].classList.add("active");
+}, 3000);
+  const music = document.getElementById("bgMusic");
+const btn = document.getElementById("musicBtn");
+
+btn.addEventListener("click", () => {
+  if (music.paused) {
+    music.play();
+    btn.innerText = "⏸ Pause Music";
+  } else {
+    music.pause();
+    btn.innerText = "▶ Play Music";
+  }
+});
+
 </script>
 
 </body>
