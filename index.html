@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hemanth ❤️ Jacquline</title>
+<title>H❤️J journey</title>
   
 
 <style>
@@ -118,7 +118,7 @@ p {
 <body>
 
 <h1>Hemanth ❤️ Jacquline</h1>
-<p>1460 Days of Togetherness</p>
+<p>4 years 1460 Days of Togetherness</p>
 <p>The love for you same and from first till now thank you for every support you have given me.
   I have been hurted you so I am need to say sorry for that and I wont repeat it again, 
   Forever and ever your always your my papa, I wont leave you forever and not for others also, 
@@ -186,18 +186,14 @@ setInterval(() => {
   const music = document.getElementById("bgMusic");
 const btn = document.getElementById("musicBtn");
 
-const music = document.getElementById("bgMusic");
-const btn = document.getElementById("musicBtn");
-
 btn.addEventListener("click", () => {
-  music.volume = 0.6;
-  music.play()
-    .then(() => {
-      btn.innerText = "⏸ Pause Music";
-    })
-    .catch(err => {
-      alert("Tap the button again to allow audio");
-    });
+  if (music.paused) {
+    music.play();
+    btn.innerText = "⏸ Pause Music";
+  } else {
+    music.pause();
+    btn.innerText = "▶ Play Music";
+  }
 });
 
 </script>
